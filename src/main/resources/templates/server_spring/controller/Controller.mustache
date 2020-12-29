@@ -1,0 +1,16 @@
+package {{package}};
+
+public class {{key}}Controller {
+
+{{#operations}}
+    @RequestMapping
+    public ResponseEntity<{{refModel}}> {{method}}{{operationId}}(
+        {{#parameters}}
+            {{
+
+            {{#hasMore}}, {{/hasMore}} {{/parameters}}
+
+    }
+{{/operations}}
+
+}
