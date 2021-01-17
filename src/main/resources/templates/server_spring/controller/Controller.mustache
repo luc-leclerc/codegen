@@ -1,12 +1,11 @@
 package {{package}};
 
-public class {{key}}Controller {
+public class {{controllerName}}Controller {
 
 {{#operations}}
     @RequestMapping
     public ResponseEntity<{{refModel}}> {{method}}{{operationId}}(
         {{#parameters}}
-            {{
 
             {{#hasMore}}, {{/hasMore}} {{/parameters}}
 
