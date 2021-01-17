@@ -11,6 +11,10 @@ import java.util.Map;
 
 /**
  * From https://swagger.io/specification/, followed the spec to create this class.
+ *
+ * Notes:
+ * - OpenApi is human read-able but still overly complex.
+ * - I didn't support all field, but added JsonNode to allow parsing without ignoring fields.
  */
 @Data
 public class OpenapiV3 {
@@ -115,7 +119,7 @@ public class OpenapiV3 {
         Map<String, ExampleObject> examples;
         Map<String, RequestBodyObject> requestBodies;
         Map<String, HeaderObject> headers;
-        Map<String, SecuritySchemaObject> securitySchemas;
+        Map<String, SecuritySchemeObject> securitySchemes;
         Map<String, LinkObject> links;
         Map<String, CallbackObject> callbacks;
     }
@@ -150,7 +154,7 @@ public class OpenapiV3 {
         String format; // int32, int64, float, double, byte, binary, date, date-time, password
         @JsonProperty("default")
         String defaultField;
-
+        String example;
         JsonNode xml;
     }
 
@@ -199,8 +203,15 @@ public class OpenapiV3 {
     }
 
     @Data
-    public static class SecuritySchemaObject extends ReferenceObject {
-
+    public static class SecuritySchemeObject extends ReferenceObject {
+        String type;
+        String description;
+        String name;
+        String in;
+        String scheme;
+        String bearerFormat;
+        JsonNode flows;
+        String openIdConnectUrl;
     }
 
     @Data
@@ -214,8 +225,16 @@ public class OpenapiV3 {
     }
 
     @Data
-    public static class ReferenceObject {
+    public static class ReferenceObject<B> {
         @JsonProperty("$ref")
         String ref;
+
+        boolean isRef() {
+            return ref != null && !ref.isEmpty();
+        }
+
+        public B get() {
+            return (B) this;
+        }
     }
 }
