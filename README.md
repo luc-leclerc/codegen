@@ -28,4 +28,4 @@
 
 
 # Ref
-https://remysharp.com/drafts/jq-recipes
+https://swagger.io/specification

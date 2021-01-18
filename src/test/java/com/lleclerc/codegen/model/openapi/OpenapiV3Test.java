@@ -26,7 +26,7 @@ public class OpenapiV3Test {
         System.out.println(serializedContent);
         OpenapiV3 secondDeserialization = objectMapper.readValue(serializedContent, OpenapiV3.class);
 
-        // TODO: Complete assertion are equals
+        // TODO
         // secondDeserialization == openapiV3
     }
 }
