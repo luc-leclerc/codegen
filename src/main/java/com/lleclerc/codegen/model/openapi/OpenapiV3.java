@@ -13,8 +13,7 @@ import java.util.Map;
  * From https://swagger.io/specification/, followed the spec to create this class.
  *
  * Notes:
- * - OpenApi is human read-able but still overly complex.
- * - I didn't support all field, but added JsonNode to allow parsing without ignoring fields.
+ * - I didn't support every field, and used JsonNode to allow parsing without ignoring fields.
  */
 @Data
 public class OpenapiV3 {

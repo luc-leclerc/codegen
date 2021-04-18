@@ -1,5 +1,6 @@
-package com.lleclerc.codegen;
+package com.lleclerc.codegen.utils;
 
+import com.lleclerc.codegen.Main;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -15,7 +16,7 @@ public class FileUtils {
     @SneakyThrows
     public static List<String> listFiles(String basePath, String subPath) {
         List<String> result = new ArrayList<>();
-        File folder = new File(CodegenPlugin.class.getClassLoader().getResource(basePath + "/" + subPath).toURI());
+        File folder = new File(Main.class.getClassLoader().getResource(basePath + "/" + subPath).toURI());
 
         File[] filesList = folder.listFiles();
         if (filesList == null) {

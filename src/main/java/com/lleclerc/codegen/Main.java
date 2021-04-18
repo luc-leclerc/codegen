@@ -17,10 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.lleclerc.codegen.FileUtils.listFiles;
+import static com.lleclerc.codegen.utils.FileUtils.listFiles;
 
 @Mojo(name = "generate-sources", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class CodegenPlugin extends AbstractMojo implements ServerSpringTransformer {
+public class Main extends AbstractMojo implements ServerSpringTransformer {
 
     @Parameter
     String packageName = "com.lleclerc.codegen.generated";
@@ -28,12 +28,10 @@ public class CodegenPlugin extends AbstractMojo implements ServerSpringTransform
     String folderDestimation = "./main/java/";
     @Parameter
     String swaggerFilePath = "C:\\Users\\Luc\\git\\codegen\\src\\test\\resources\\sample.yml";
-    @Parameter
-    String templateName = TemplateEnum.SERVER_SPRING.getTemplateName();
 
     @SneakyThrows
     public static void main(String[] args) {
-        CodegenPlugin plugin = new CodegenPlugin();
+        Main plugin = new Main();
 
         plugin.execute();
     }
@@ -49,19 +47,19 @@ public class CodegenPlugin extends AbstractMojo implements ServerSpringTransform
         fileWriter.flush();
         fileWriter.close();
 
-        String basePath = "./templates/" + TemplateEnum.fromTemplateName(templateName).getTemplateName() + "/";
-        List<String> list = listFiles(basePath, "");
-
-        for (String fileName : list) {
-            Mustache mustache = new DefaultMustacheFactory().compile(basePath + fileName);
-
-            Map<String, Object> model = new HashMap<>();
-            model.put("package", "fewuabfwef");
-
-            String path = folderDestimation + packageName.replaceAll("\\.", "/");
-            File output = new File(path + fileName);
-            mustache.execute(new PrintWriter(output), model).flush();
-        }
+//        String basePath = "./templates/" + TemplateEnum.fromTemplateName(templateName).getTemplateName() + "/";
+//        List<String> list = listFiles(basePath, "");
+//
+//        for (String fileName : list) {
+//            Mustache mustache = new DefaultMustacheFactory().compile(basePath + fileName);
+//
+//            Map<String, Object> model = new HashMap<>();
+//            model.put("package", "fewuabfwef");
+//
+//            String path = folderDestimation + packageName.replaceAll("\\.", "/");
+//            File output = new File(path + fileName);
+//            mustache.execute(new PrintWriter(output), model).flush();
+//        }
 
         System.out.println("end");
     }

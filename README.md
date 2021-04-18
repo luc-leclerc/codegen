@@ -26,6 +26,15 @@
 ```
 3. Run `mvn generate-sources` 
 
+# Mustache convention
+
+## Case Style
+* CC: camelCase
+* PC: PascalCase
+* SC: snake_case
+* KC: kebab-case
+* DC: dot.case
+
 
 # Ref
 https://swagger.io/specification

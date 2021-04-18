@@ -1,0 +1,13 @@
+package {{javaPackage_DC}};
+
+public interface {{title_PC}}Api {
+
+    {{#paths[]}}
+     {{.}}
+     {{#.{}}}
+     {{/.{}}}
+    {{/paths[]}}
+    public {{title_PC}}Api() {
+
+    }
+}
