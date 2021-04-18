@@ -1,7 +1,8 @@
-package com.lleclerc.codegen.model.openapi;
+package com.lleclerc.openapi.model.openapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.lleclerc.openapi.model.OpenapiV3Model;
 import lombok.SneakyThrows;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,11 +21,11 @@ public class OpenapiV3Test {
     @SneakyThrows
     public void serializeAndDeserialize_works() {
 //        JsonNode node = objectMapper.readValue(sampleYaml, JsonNode.class);
-        OpenapiV3 openapiV3 = objectMapper.readValue(sampleYaml, OpenapiV3.class);
+        OpenapiV3Model openapiV3 = objectMapper.readValue(sampleYaml, OpenapiV3Model.class);
 
         String serializedContent = objectMapper.writeValueAsString(openapiV3);
         System.out.println(serializedContent);
-        OpenapiV3 secondDeserialization = objectMapper.readValue(serializedContent, OpenapiV3.class);
+        OpenapiV3Model secondDeserialization = objectMapper.readValue(serializedContent, OpenapiV3Model.class);
 
         // TODO
         // secondDeserialization == openapiV3

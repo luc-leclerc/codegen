@@ -1,4 +1,4 @@
-package com.lleclerc.codegen.model.openapi;
+package com.lleclerc.codegen.source;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -16,7 +16,7 @@ import java.util.Map;
  * - I didn't support every field, and used JsonNode to allow parsing without ignoring fields.
  */
 @Data
-public class OpenapiV3 {
+public class OpenapiV3Model {
     String openapi; // Required
     InfoObject info; // Required
     List<ServerObject> servers = new ArrayList<>();

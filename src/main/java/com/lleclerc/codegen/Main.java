@@ -1,7 +1,5 @@
 package com.lleclerc.codegen;
 
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
 import lombok.SneakyThrows;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -13,11 +11,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static com.lleclerc.codegen.utils.FileUtils.listFiles;
 
 @Mojo(name = "generate-sources", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class Main extends AbstractMojo implements ServerSpringTransformer {

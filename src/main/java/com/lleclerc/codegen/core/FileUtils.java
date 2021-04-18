@@ -1,4 +1,4 @@
-package com.lleclerc.codegen.utils;
+package com.lleclerc.codegen.core;
 
 import com.lleclerc.codegen.Main;
 import lombok.SneakyThrows;

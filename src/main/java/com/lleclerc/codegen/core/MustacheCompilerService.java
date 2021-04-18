@@ -1,4 +1,4 @@
-package com.lleclerc.codegen.service;
+package com.lleclerc.codegen.core;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.lleclerc.codegen.utils.FileUtils.listFiles;
+import static com.lleclerc.codegen.core.FileUtils.listFiles;
 
 public class MustacheCompilerService {
 
