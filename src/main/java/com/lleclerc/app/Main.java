@@ -1,4 +1,4 @@
-package com.lleclerc.codegen;
+package com.lleclerc.app;
 
 import lombok.SneakyThrows;
 import org.apache.maven.plugin.AbstractMojo;

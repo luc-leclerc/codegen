@@ -1,6 +1,6 @@
 package com.lleclerc.codegen.service;
 
-import com.lleclerc.codegen.core.MustacheCompilerService;
+import com.lleclerc.app.config.MustacheCompilerService;
 import org.junit.Test;
 
 import java.util.Collections;

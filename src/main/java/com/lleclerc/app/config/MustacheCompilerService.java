@@ -1,4 +1,4 @@
-package com.lleclerc.codegen.core;
+package com.lleclerc.app.config;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.lleclerc.codegen.core.FileUtils.listFiles;
+import static com.lleclerc.service.file.FileUtil.listFiles;
 
 public class MustacheCompilerService {
 
@@ -26,8 +26,6 @@ public class MustacheCompilerService {
         mustache.execute(writer, model).flush();
         return writer.toString();
     }
-
-
 
     @SneakyThrows
     public void execute(String sourceTemplatePath, String destinationCompiledPath) {

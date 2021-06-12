@@ -1,6 +1,6 @@
-package com.lleclerc.codegen.core;
+package com.lleclerc.service.file;
 
-import com.lleclerc.codegen.Main;
+import com.lleclerc.app.Main;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileUtils {
+public interface FileUtil {
 
     @SneakyThrows
-    public static List<String> listFiles(String basePath, String subPath) {
+    static List<String> listFiles(String basePath, String subPath) {
         List<String> result = new ArrayList<>();
         File folder = new File(Main.class.getClassLoader().getResource(basePath + "/" + subPath).toURI());
 
@@ -33,7 +33,7 @@ public class FileUtils {
     }
 
     @SneakyThrows
-    public static String readFile(String filePath) {
+    static String readFile(String filePath) {
         return Files.lines(Paths.get(filePath), StandardCharsets.UTF_8).collect(Collectors.joining("\n"));
     }
 }
