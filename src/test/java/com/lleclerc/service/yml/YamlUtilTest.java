@@ -1,6 +1,5 @@
 package com.lleclerc.service.yml;
 
-import com.lleclerc.service.java.ResourceUtil;
 import lombok.SneakyThrows;
 import org.junit.Test;
 

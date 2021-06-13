@@ -1,6 +1,5 @@
 package com.lleclerc.service.swagger;
 
-import com.lleclerc.service.java.ResourceUtil;
 import com.lleclerc.service.yml.YamlUtil;
 import org.junit.Test;
 
