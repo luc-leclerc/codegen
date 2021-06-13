@@ -1,5 +1,6 @@
 package com.lleclerc.service.mustache;
 
+import com.lleclerc.service.java.ResourceUtil;
 import org.junit.Test;
 
 import java.io.Reader;
