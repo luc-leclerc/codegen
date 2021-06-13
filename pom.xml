@@ -9,6 +9,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
+    <properties>
+        <java.version>16</java.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -33,33 +37,17 @@
             <version>0.9.7</version>
         </dependency>
 
+        <!-- Added to easily map reserved name on model with snakeyaml-->
+        <!-- Added to  -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>2.11.1</version>
         </dependency>
         <dependency>
-            <groupId>net.thisptr</groupId>
-            <artifactId>jackson-jq</artifactId>
-            <version>1.0.0-preview.20201123</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.arakelian</groupId>
-            <artifactId>java-jq</artifactId>
-            <version>1.1.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.26</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
+            <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -74,34 +62,37 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>15</source>
+                    <target>15</target>
                 </configuration>
             </plugin>
-<!--            https://maven.apache.org/enforcer/enforcer-rules/index.html-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>1.8</version>
-                                </requireJavaVersion>
-<!--                                <dependencyConvergence/>-->
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-antrun-plugin</artifactId>-->
+<!--                <version>1.8</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>run</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <tasks>-->
+<!--                                <echo>Using env.test.properties</echo>-->
+<!--&lt;!&ndash;                                <mkdir dir="${basedir}/target/folder"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <copy file="textfile.txt" tofile="${basedir}/target/textfile.txt"/>&ndash;&gt;-->
+<!--                                <copy todir="${basedir}/target/classes/com/lleclerc/app/codegen/template/">-->
+<!--                                    <fileset dir="${basedir}/src/main/java/com/lleclerc/app/codegen/template" includes="**/*" />-->
+<!--                                </copy>-->
+<!--                            </tasks>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
+<!--        <resources>-->
+<!--            -->
+<!--        </resources>-->
     </build>
 </project>

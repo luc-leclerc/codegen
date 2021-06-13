@@ -13,8 +13,8 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-@Mojo(name = "generate-sources", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class Main extends AbstractMojo implements ServerSpringTransformer {
+//@Mojo(name = "generate-sources", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class Main  {
 
     @Parameter
     String packageName = "com.lleclerc.codegen.generated";
@@ -30,16 +30,16 @@ public class Main extends AbstractMojo implements ServerSpringTransformer {
         plugin.execute();
     }
 
-    @Override
+//    @Override
     @SneakyThrows
     public void execute() throws MojoExecutionException, MojoFailureException {
-        Map<String, Object> swaggerMap = parseYaml(swaggerFilePath);
-        Map<String, Object> mustacheMap = toMustacheModel(swaggerMap);
-        File file = new File("testtt.txt");
-        FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write("test");
-        fileWriter.flush();
-        fileWriter.close();
+//        Map<String, Object> swaggerMap = parseYaml(swaggerFilePath);
+//        Map<String, Object> mustacheMap = toMustacheModel(swaggerMap);
+//        File file = new File("testtt.txt");
+//        FileWriter fileWriter = new FileWriter(file);
+//        fileWriter.write("test");
+//        fileWriter.flush();
+//        fileWriter.close();
 
 //        String basePath = "./templates/" + TemplateEnum.fromTemplateName(templateName).getTemplateName() + "/";
 //        List<String> list = listFiles(basePath, "");
@@ -56,22 +56,5 @@ public class Main extends AbstractMojo implements ServerSpringTransformer {
 //        }
 
         System.out.println("end");
-    }
-
-    @SneakyThrows
-    private void processMustache(File template) {
-//        DefaultMustacheFactory defaultMustacheFactory = new DefaultMustacheFactory().compile("f")
-//        Path path = Paths.get(packageDestination, fileName);
-//
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            getMustache().execute(writer, scopes).flush();
-//        }
-    }
-
-    @SneakyThrows
-    private Map<String, Object> parseYaml(String path) {
-        File file = new File(path);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
-        return new Yaml().loadAs(reader, Map.class);
     }
 }
