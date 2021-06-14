@@ -7,10 +7,12 @@
     <groupId>com.lleclerc</groupId>
     <artifactId>codegen</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>maven-plugin</packaging>
+<!--    <packaging>maven-plugin</packaging>-->
 
     <properties>
         <java.version>16</java.version>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -57,42 +59,32 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                </configuration>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo>Copy java-template to main/resources folder.</echo>
+                                <delete dir="${basedir}/src/main/resources/com/lleclerc/app/codegen/template"/>
+                                <copy todir="${basedir}/src/main/resources/com/lleclerc/app/codegen/template">
+                                    <fileset dir="${basedir}/src/main/java/com/lleclerc/app/codegen/template"
+                                             includes="**/*"/>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-antrun-plugin</artifactId>-->
-<!--                <version>1.8</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>generate-resources</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>run</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <tasks>-->
-<!--                                <echo>Using env.test.properties</echo>-->
-<!--&lt;!&ndash;                                <mkdir dir="${basedir}/target/folder"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <copy file="textfile.txt" tofile="${basedir}/target/textfile.txt"/>&ndash;&gt;-->
-<!--                                <copy todir="${basedir}/target/classes/com/lleclerc/app/codegen/template/">-->
-<!--                                    <fileset dir="${basedir}/src/main/java/com/lleclerc/app/codegen/template" includes="**/*" />-->
-<!--                                </copy>-->
-<!--                            </tasks>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
-<!--        <resources>-->
-<!--            -->
-<!--        </resources>-->
     </build>
 </project>

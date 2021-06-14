@@ -1,13 +1,9 @@
 package com.lleclerc.app.codegen;
 
-import com.lleclerc.app.codegen.model.ModelScope;
-import com.lleclerc.app.codegen.template.ModelClass;
-import com.lleclerc.service.mustache.MustacheUtil;
 import com.lleclerc.service.swagger.OpenapiV3Model;
 import lombok.SneakyThrows;
 
 import java.nio.file.Path;
-import java.util.Map;
 
 public interface CodeGenUtil {
 

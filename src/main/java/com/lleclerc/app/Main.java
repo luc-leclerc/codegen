@@ -7,14 +7,11 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
+import java.io.File;
 
-//@Mojo(name = "generate-sources", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class Main  {
+@Mojo(name = "generate-sources", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class Main extends AbstractMojo {
 
     @Parameter
     String packageName = "com.lleclerc.codegen.generated";
@@ -30,16 +27,10 @@ public class Main  {
         plugin.execute();
     }
 
-//    @Override
+    @Override
     @SneakyThrows
     public void execute() throws MojoExecutionException, MojoFailureException {
-//        Map<String, Object> swaggerMap = parseYaml(swaggerFilePath);
-//        Map<String, Object> mustacheMap = toMustacheModel(swaggerMap);
-//        File file = new File("testtt.txt");
-//        FileWriter fileWriter = new FileWriter(file);
-//        fileWriter.write("test");
-//        fileWriter.flush();
-//        fileWriter.close();
+
 
 //        String basePath = "./templates/" + TemplateEnum.fromTemplateName(templateName).getTemplateName() + "/";
 //        List<String> list = listFiles(basePath, "");
@@ -57,4 +48,15 @@ public class Main  {
 
         System.out.println("end");
     }
+
+    @SneakyThrows
+    private void processMustache(File template) {
+//        DefaultMustacheFactory defaultMustacheFactory = new DefaultMustacheFactory().compile("f")
+//        Path path = Paths.get(packageDestination, fileName);
+//
+//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+//            getMustache().execute(writer, scopes).flush();
+//        }
+    }
+
 }
