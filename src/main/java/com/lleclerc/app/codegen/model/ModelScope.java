@@ -14,7 +14,7 @@ public class ModelScope {
     @Value
     public static class ModelScopeProperty {
         String propertyName;
-        String propertySafeName;
+        String propertyNameSafe;
         String type;
         String defaultValue;
     }

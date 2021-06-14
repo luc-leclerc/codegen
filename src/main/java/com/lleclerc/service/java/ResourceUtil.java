@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//@SuppressWarnings("ConstantConditions") // This fix `.toURI()` warning.
+@SuppressWarnings("ConstantConditions") // This fix `.toURI()` warning.
 public interface ResourceUtil {
     @SneakyThrows
     default InputStream readResource(String fileName) {
@@ -17,14 +17,13 @@ public interface ResourceUtil {
     }
 
     @SneakyThrows
-    default Reader readResourceAsBufferedReader(String fileName) {
-        Path path = Paths.get(this.getClass().getResource(fileName).toURI());
-        return Files.newBufferedReader(path, StandardCharsets.UTF_8);
+    default String readResourceAsString(String fileName) {
+        return readResourceAsString(fileName, this.getClass());
     }
 
     @SneakyThrows
-    default String readResourceAsString(String fileName) {
-        Path path = Paths.get(this.getClass().getResource(fileName).toURI());
+    static String readResourceAsString(String fileName, Class<?> rootClass) {
+        Path path = Paths.get(rootClass.getResource(fileName).toURI());
         return Files.readString(path, StandardCharsets.UTF_8);
     }
 }

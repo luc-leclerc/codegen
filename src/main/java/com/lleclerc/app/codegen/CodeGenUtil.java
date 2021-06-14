@@ -1,39 +1,24 @@
 package com.lleclerc.app.codegen;
 
-import com.lleclerc.service.swagger.OpenapiV3Model;
+import com.lleclerc.service.java.ResourceUtil;
+import com.lleclerc.service.mustache.MustacheUtil;
 import lombok.SneakyThrows;
 
 import java.nio.file.Path;
+import java.util.regex.Pattern;
 
-public interface CodeGenUtil {
+public interface CodeGenUtil extends ResourceUtil {
+    Pattern PATTERN_CLEAN_TEMPLATE = Pattern.compile("(.*?)[^ ]*[/][*][{]{2}(.*?)[}]{2}[*][/].*?");
 
-    @SneakyThrows
-//    @SuppressWarnings("ResultOfMethodCallIgnored")
-    static void compileModels(OpenapiV3Model model, Path destination) {
+    static void compileModelToFile(Path destination, String filename, Object model) {
+        String rawTemplate = ResourceUtil.readResourceAsString("./template/ModelClass.java", CodeGenUtil.class);
+        String template = cleanUpTemplate(rawTemplate);
 
-//        for (Map.Entry<String, OpenapiV3Model.SchemaObject> entry : model.getComponents().getSchemas().entrySet()) {
-////            if (entry.getValue().getType())
-//        }
-
-//        model.getComponents().getSchemas()
-//        file.getParentFile().mkdirs();
-//        List<String> list = listFiles(sourceTemplatePath, "");
-//        for (String fileName : list) {
-//            Mustache mustache = MUSTACHE_FACTORY.compile(fileName);
-//
-//            Map<String, Object> model = new HashMap<>();
-//            model.put("package", "fewuabfwef");
-//
-//            String subPath = fileName.substring(sourceTemplatePath.length());
-//            model.put("javaPackageName", subPath.replaceAll(File.separator, "."));
-//
-//            File output = new File(destinationCompiledPath, subPath);
-//            mustache.execute(new PrintWriter(output), model).flush();
-//        }
+        MustacheUtil.compileToFile(template, destination, filename, model);
     }
 
-    static void compileModel(Object model, Path destination) {
-
-//        MustacheUtil.compile();
+    @SneakyThrows
+    static String cleanUpTemplate(String template) {
+        return PATTERN_CLEAN_TEMPLATE.matcher(template).replaceAll("$1{{$2}}");
     }
 }

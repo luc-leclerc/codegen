@@ -6,29 +6,26 @@ import lombok.SneakyThrows;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
 
 public interface MustacheUtil {
     DefaultMustacheFactory MUSTACHE_FACTORY = new DefaultMustacheFactory();
 
     @SneakyThrows
-    static void compileToFile(Path mustacheTemplate, Path destFolder, String destFileName, Map<String, Object> model) {
-        Reader templateReader = Files.newBufferedReader(mustacheTemplate, StandardCharsets.UTF_8);
+    static void compileToFile(String mustacheTemplate, Path destFolder, String destFileName, Object model) {
         FileWriter fileWriter = new FileWriter(new File(destFolder.toString(), destFileName), StandardCharsets.UTF_8);
-        compile(templateReader, fileWriter, model);
+        compile(new StringReader(mustacheTemplate), fileWriter, model);
     }
 
     @SneakyThrows
-    static String compile(String mustacheTemplate, Map<String, Object> model) {
+    static String compile(String mustacheTemplate, Object model) {
         StringWriter stringWriter = new StringWriter();
         compile(new StringReader(mustacheTemplate), stringWriter, model);
         return stringWriter.toString();
     }
 
     @SneakyThrows
-    static void compile(Reader templateReader, Writer compiledWriter, Map<String, Object> model) {
+    static void compile(Reader templateReader, Writer compiledWriter, Object model) {
         Mustache mustache = MUSTACHE_FACTORY.compile(templateReader, "dummyName");
         mustache.execute(compiledWriter, model).flush();
     }
