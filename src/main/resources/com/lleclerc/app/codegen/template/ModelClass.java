@@ -8,7 +8,7 @@ import lombok.Value;
 public class ModelClass/*{{{className}}}*/ {
   /*{{#properties}}*/
     @JsonProperty("{{{propertyName}}}")
-    String/*{{{type}}}*/ nameNotReserved/*{{{propertySafeName}}}*/ = null/*{{{defaultValue}}}*/;
+    String/*{{{type}}}*/ propertySafeName/*{{{propertyNameSafe}}}*/ = null/*{{{defaultValue}}}*/;
   /*{{/properties}}*/
 }
 // @formatter:on
