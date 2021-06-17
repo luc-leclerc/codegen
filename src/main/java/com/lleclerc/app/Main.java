@@ -23,40 +23,12 @@ public class Main extends AbstractMojo {
     @SneakyThrows
     public static void main(String[] args) {
         Main plugin = new Main();
-
         plugin.execute();
     }
 
     @Override
     @SneakyThrows
     public void execute() throws MojoExecutionException, MojoFailureException {
-
-
-//        String basePath = "./templates/" + TemplateEnum.fromTemplateName(templateName).getTemplateName() + "/";
-//        List<String> list = listFiles(basePath, "");
-//
-//        for (String fileName : list) {
-//            Mustache mustache = new DefaultMustacheFactory().compile(basePath + fileName);
-//
-//            Map<String, Object> model = new HashMap<>();
-//            model.put("package", "fewuabfwef");
-//
-//            String path = folderDestimation + packageName.replaceAll("\\.", "/");
-//            File output = new File(path + fileName);
-//            mustache.execute(new PrintWriter(output), model).flush();
-//        }
-
         System.out.println("end");
     }
-
-    @SneakyThrows
-    private void processMustache(File template) {
-//        DefaultMustacheFactory defaultMustacheFactory = new DefaultMustacheFactory().compile("f")
-//        Path path = Paths.get(packageDestination, fileName);
-//
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            getMustache().execute(writer, scopes).flush();
-//        }
-    }
-
 }
