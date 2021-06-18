@@ -11,7 +11,7 @@ public class OpenapiV3ModelTransformerTest implements ResourceUtil {
     @Test
     public void transform() {
         // GIVEN
-        OpenapiV3Model model = YamlUtil.parseYaml_jackson(readResource("swagger-pet-sample.yml"), OpenapiV3Model.class);
+        OpenapiV3Model model = YamlUtil.parseYaml_jackson(readResource("../swagger-pet-sample.yml"), OpenapiV3Model.class);
 
         // WHEN
         OpenapiV3ModelTransformer.transform(model);
