@@ -1,7 +1,7 @@
 package com.lleclerc.app.codegen;
 
 import com.lleclerc.app.codegen.model.JavaClass;
-import com.lleclerc.app.codegen.model.JavaProperty;
+import com.lleclerc.app.codegen.model.JavaClassProperty;
 import com.lleclerc.service.java.ResourceUtil;
 import lombok.SneakyThrows;
 import org.junit.Test;
@@ -30,9 +30,8 @@ public class CodeGenUtilTest implements ResourceUtil {
         JavaClass javaClass = JavaClass.builder()
                 .packageName("com.luc.test")
                 .className("Hello")
-                .property(JavaProperty.builder()
+                .property(JavaClassProperty.builder()
                         .propertyName("abc")
-                        .propertyNameSafe("abcSafe")
                         .defaultValue("\"value\"")
                         .type("String").build()).build();
         StringWriter stringWriter = new StringWriter();

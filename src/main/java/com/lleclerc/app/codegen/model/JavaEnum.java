@@ -8,9 +8,9 @@ import java.util.List;
 
 @Value
 @Builder
-public class JavaClass {
-    String className;
+public class JavaEnum {
+    String enumName;
     String packageName;
     @Singular
-    List<JavaClassProperty> properties;
+    List<JavaEnumElement> elements;
 }

@@ -8,7 +8,8 @@ import lombok.SneakyThrows;
 import java.io.Writer;
 import java.util.regex.Pattern;
 
-public interface CodeGenUtil extends ResourceUtil {
+public interface CodeGenUtil {
+    // Prepare mustache template, ex.: `my test/*{{myTag}}*/` -> `test{{myTag}}`
     Pattern PATTERN_CLEAN_TEMPLATE = Pattern.compile("(.*?)[^ ]*[/][*][{]{2}(.*?)[}]{2}[*][/].*?");
 
     static void compileModelToWriter(Object model, Writer writer) {
@@ -16,7 +17,7 @@ public interface CodeGenUtil extends ResourceUtil {
         String rawTemplate = ResourceUtil.readResourceAsString(resourcePath, CodeGenUtil.class);
         String template = cleanUpTemplate(rawTemplate);
 
-        MustacheUtil.compile(template, model, writer);
+        MustacheUtil.compile(template, MustacheMagicMapUtil.toSafeJavaModel(model), writer);
     }
 
     @SneakyThrows

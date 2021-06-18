@@ -24,8 +24,7 @@
     </plugins>
 </build>
 ```
-3. Run `mvn generate-sources` 
+3. Run `mvn generate-sources`
 
-
-# Links
+# References
 * (swagger spec)[https://swagger.io/specification]
