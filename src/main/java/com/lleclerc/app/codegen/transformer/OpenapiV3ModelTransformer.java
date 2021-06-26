@@ -17,7 +17,7 @@ public interface OpenapiV3ModelTransformer {
         return result;
     }
 
-    static Object transformToModel(String name, OpenapiV3Model.SchemaObject schema) {
+    static JavaClass transformToModel(String name, OpenapiV3Model.SchemaObject schema) {
         JavaClass javaClass = JavaClass.builder()
                 .className(name)
                 .packageName("").property(null).build();

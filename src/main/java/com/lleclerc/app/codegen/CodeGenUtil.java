@@ -1,6 +1,7 @@
 package com.lleclerc.app.codegen;
 
 import com.lleclerc.app.codegen.template.ModelClass;
+import com.lleclerc.app.codegen.util.JavaNameMap;
 import com.lleclerc.service.java.ResourceUtil;
 import com.lleclerc.service.mustache.MustacheUtil;
 import lombok.SneakyThrows;
@@ -9,15 +10,14 @@ import java.io.Writer;
 import java.util.regex.Pattern;
 
 public interface CodeGenUtil {
-    // Prepare mustache template, ex.: `my test/*{{myTag}}*/` -> `test{{myTag}}`
+    // Prepare mustache template, ex.: `my test/*{{myTag}}*/` -> `my {{myTag}}`
     Pattern PATTERN_CLEAN_TEMPLATE = Pattern.compile("(.*?)[^ ]*[/][*][{]{2}(.*?)[}]{2}[*][/].*?");
 
     static void compileModelToWriter(Object model, Writer writer) {
         String resourcePath = "./template/" + ModelClass.class.getSimpleName() + ".java";
         String rawTemplate = ResourceUtil.readResourceAsString(resourcePath, CodeGenUtil.class);
         String template = cleanUpTemplate(rawTemplate);
-
-        MustacheUtil.compile(template, MustacheMagicMapUtil.toSafeJavaModel(model), writer);
+        MustacheUtil.compile(template, new JavaNameMap(model), writer);
     }
 
     @SneakyThrows
