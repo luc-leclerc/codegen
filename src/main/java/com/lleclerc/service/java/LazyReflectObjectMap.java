@@ -1,5 +1,6 @@
 package com.lleclerc.service.java;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
@@ -7,18 +8,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LazyReflectObjectMap implements Map<Object, Object> {
-    final Map<Object, Object> map = new HashMap<>();
-    final Object object;
+    protected final Map<Object, Object> cacheMap = new HashMap<>();
+    @Getter
+    final Object coreObject;
 
-    public LazyReflectObjectMap(Object object) {
-        this.object = object;
+    public LazyReflectObjectMap(Object coreObject) {
+        this.coreObject = coreObject;
     }
 
     @Override
     @SneakyThrows
     public boolean containsKey(Object key) {
         if (key instanceof String keyString) {
-            return object.getClass().getDeclaredField(keyString) != null;
+            return coreObject.getClass().getDeclaredField(keyString) != null;
         }
         return false;
     }
@@ -26,65 +28,63 @@ public class LazyReflectObjectMap implements Map<Object, Object> {
     @Override
     @SneakyThrows
     public Object get(Object key) {
-        Object cache = map.get(key);
+        Object cache = cacheMap.get(key);
         if (cache != null) {
             return cache;
         }
+        Object value = reflectiveGetValue(key);
+        put(key, value);
+        return value;
+    }
+
+    @SneakyThrows
+    private Object reflectiveGetValue(Object key) {
         if (key instanceof String keyString) {
-            Field field = object.getClass().getDeclaredField(keyString);
+            Field field = coreObject.getClass().getDeclaredField(keyString);
             field.setAccessible(true);
-            Object value = field.get(object);
-            if (value == null) {
-                return null;
-            }
-            if (value.getClass().getPackageName().startsWith("java.lang")) {
-                map.put(key, value);
+            Object value = field.get(coreObject);
+
+            if (value == null || value.getClass().getPackageName().startsWith("java.lang"))
                 return value;
-            }
             if (value instanceof List valueList) {
                 if (valueList.isEmpty() || valueList.get(0).getClass().getPackageName().startsWith("java.lang")) {
-                    put(key, value);
                     return valueList;
                 }
-                List<Object> withLazyWrap = (List<Object>) valueList.stream().map(LazyReflectObjectMap::new).collect(Collectors.toList());
-                put(key, withLazyWrap);
-                return withLazyWrap;
+                return valueList.stream().map(LazyReflectObjectMap::new).collect(Collectors.toList());
             }
-            LazyReflectObjectMap subObject = new LazyReflectObjectMap(value);
-            put(key, subObject);
-            return subObject;
+            return new LazyReflectObjectMap(value);
         }
         return null;
     }
 
     @Override
     public Object put(Object key, Object value) {
-        return map.put(key, value);
+        return cacheMap.put(key, value);
     }
 
     @Override
     public Object remove(Object key) {
-        return map.remove(key);
+        return cacheMap.remove(key);
     }
 
     @Override
     public void putAll(Map<?, ?> m) {
-        map.putAll(m);
+        cacheMap.putAll(m);
     }
 
     @Override
     public void clear() {
-        map.clear();
+        cacheMap.clear();
     }
 
     @Override
     public Set<Object> keySet() {
-        return map.keySet();
+        return cacheMap.keySet();
     }
 
     @Override
     public Collection<Object> values() {
-        return map.values();
+        return cacheMap.values();
     }
 
     @Override
@@ -94,26 +94,26 @@ public class LazyReflectObjectMap implements Map<Object, Object> {
 
     @Override
     public int size() {
-        return map.size();
+        return cacheMap.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return map.isEmpty();
+        return cacheMap.isEmpty();
     }
 
     @Override
     public boolean containsValue(Object value) {
-        return map.containsValue(value);
+        return cacheMap.containsValue(value);
     }
 
     @Override
     public boolean equals(Object o) {
-        return map.equals(o);
+        return cacheMap.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return map.hashCode();
+        return cacheMap.hashCode();
     }
 }
