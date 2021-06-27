@@ -1,4 +1,4 @@
-package com.lleclerc.app.codegen.model;
+package com.lleclerc.app.codegen.java.model;
 
 import lombok.Builder;
 import lombok.Value;
@@ -8,5 +8,4 @@ import lombok.Value;
 public class JavaClassProperty {
     String propertyName;
     String type;
-    String defaultValue;
 }

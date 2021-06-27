@@ -26,5 +26,17 @@
 ```
 3. Run `mvn generate-sources`
 
+
+# Technical decision 
+
+* This project is a tool to generate boilerplate code to support a simple API.
+  * `a simple API` Default value won't be supported.
+  * `a simple API` Required value won't be supported.
+  * `a simple API` Inner Object/Enum not directly under `schemas` won't be supported. A single namespace allowed. 
+
+# Development
+
+* `mvn generate-resources` to refresh templates
+
 # References
-* (swagger spec)[https://swagger.io/specification]
+* [swagger spec](https://swagger.io/specification)

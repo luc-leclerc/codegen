@@ -1,7 +1,8 @@
 package com.lleclerc.app.codegen;
 
-import com.lleclerc.app.codegen.model.JavaClass;
-import com.lleclerc.app.codegen.model.JavaClassProperty;
+import com.lleclerc.app.codegen.java.JavaCodeGenUtil;
+import com.lleclerc.app.codegen.java.model.JavaClass;
+import com.lleclerc.app.codegen.java.model.JavaClassProperty;
 import com.lleclerc.service.java.ResourceUtil;
 import lombok.SneakyThrows;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class CodeGenUtilTest implements ResourceUtil {
         String template = readResourceAsString("./template/ModelClass.java");
 
         // WHEN
-        String cleanedTemplate = CodeGenUtil.cleanUpTemplate(template);
+        String cleanedTemplate = JavaCodeGenUtil.cleanUpTemplate(template);
 
         // THEN
         assertNotNull(cleanedTemplate);
@@ -27,20 +28,10 @@ public class CodeGenUtilTest implements ResourceUtil {
     @SneakyThrows
     public void compileModelToWriter() {
         // GIVEN
-        JavaClass javaClass = JavaClass.builder()
-                .packageName("com.luc.test")
-                .className("Hello")
-                .property(JavaClassProperty.builder()
-                        .propertyName("abc")
-                        .defaultValue("\"value\"")
-                        .type("String").build()).build();
-        StringWriter stringWriter = new StringWriter();
-
+        String swaggerFile = "/home/table/git/codegen/src/test/resources/com/lleclerc/app/codegen/swagger-pet-sample.yml";
+        String destinationPath = "/home/table/git/codegen/src/main/java";
+        String basePackage = "com.lleclerc.app.codegen";
         // WHEN
-        CodeGenUtil.compileModelToWriter(javaClass, stringWriter);
-
-        // THEN
-        assertNotNull(stringWriter.toString());
-        System.out.println(stringWriter);
+        JavaCodeGenUtil.executeJava(swaggerFile, destinationPath, basePackage);
     }
 }

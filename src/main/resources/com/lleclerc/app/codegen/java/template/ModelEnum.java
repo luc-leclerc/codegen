@@ -1,7 +1,8 @@
-package com.lleclerc.app.codegen.template/*{{{packageName}}}*/;
+package com.lleclerc.app.codegen.java.template/*{{{packageName}}}*/;
 
 import lombok.Getter;
 
+// Generated on {{{now}}}
 @Getter
 public enum ModelEnum/*enumName*/ {
     /*{{#elements}}*/

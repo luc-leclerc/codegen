@@ -19,9 +19,10 @@ public class LazyReflectObjectMap implements Map<Object, Object> {
     @Override
     @SneakyThrows
     public boolean containsKey(Object key) {
-        if (key instanceof String keyString) {
+        if (cacheMap.containsKey(key))
+            return true;
+        if (key instanceof String keyString)
             return coreObject.getClass().getDeclaredField(keyString) != null;
-        }
         return false;
     }
 

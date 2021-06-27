@@ -76,9 +76,9 @@
                         <configuration>
                             <tasks>
                                 <echo>Copy java-template to main/resources folder.</echo>
-                                <delete dir="${basedir}/src/main/resources/com/lleclerc/app/codegen/template"/>
-                                <copy todir="${basedir}/src/main/resources/com/lleclerc/app/codegen/template">
-                                    <fileset dir="${basedir}/src/main/java/com/lleclerc/app/codegen/template"
+                                <delete dir="${basedir}/src/main/resources/com/lleclerc/app/codegen/java/template"/>
+                                <copy todir="${basedir}/src/main/resources/com/lleclerc/app/codegen/java/template">
+                                    <fileset dir="${basedir}/src/main/java/com/lleclerc/app/codegen/java/template"
                                              includes="**/*"/>
                                 </copy>
                             </tasks>

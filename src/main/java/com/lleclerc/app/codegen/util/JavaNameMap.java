@@ -4,6 +4,8 @@ import com.lleclerc.service.java.LazyReflectObjectMap;
 import com.lleclerc.service.java.PatternUtil;
 import lombok.SneakyThrows;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -12,9 +14,13 @@ import java.util.stream.Collectors;
 
 public class JavaNameMap extends LazyReflectObjectMap {
     Pattern SAFE_JAVA_SUFFIX = Pattern.compile("^(.*)_(safeJava)$");
+    DateTimeFormatter NOW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
 
     public JavaNameMap(Object object) {
         super(object);
+        put("empty", "");
+        put("now", LocalDateTime.now().format(NOW_FORMATTER));
     }
 
     @Override
@@ -47,7 +53,7 @@ public class JavaNameMap extends LazyReflectObjectMap {
             if (matcher.find()) {
                 Object value = super.get(matcher.group(1));
                 if (value instanceof String valueString) {
-                    return PatternUtil.toSafeJavaName(valueString);
+                    return PatternUtil.toCamelCaseWithLettersOnly(valueString);
                 }
             } else {
                 Object value = super.get(object);

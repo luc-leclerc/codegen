@@ -1,4 +1,4 @@
-package com.lleclerc.app.codegen.model;
+package com.lleclerc.app.codegen.java.model;
 
 import lombok.Builder;
 import lombok.Singular;
@@ -8,9 +8,9 @@ import java.util.List;
 
 @Value
 @Builder
-public class JavaEnum {
-    String enumName;
+public class JavaClass {
+    String className;
     String packageName;
     @Singular
-    List<JavaEnumElement> elements;
+    List<JavaClassProperty> properties;
 }

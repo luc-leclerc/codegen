@@ -1,6 +1,7 @@
 package com.lleclerc.service.yml;
 
 import com.lleclerc.service.java.ResourceUtil;
+import com.lleclerc.service.yml.snakeyaml.SnakeImplYamlUtil;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class YamlUtilTest implements ResourceUtil {
+public class SnakeImplYamlUtilTest implements ResourceUtil {
     @Test
     @SneakyThrows
     public void loadYaml() {
@@ -17,7 +18,7 @@ public class YamlUtilTest implements ResourceUtil {
         InputStream is = readResource("yml-sample.yml");
 
         // WHEN
-        Map<String, Object> test = YamlUtil.parseYaml_snakeyaml(is);
+        Map<String, Object> test = SnakeImplYamlUtil.parseInputStream(is);
 
         // THEN
         assertEquals(111, test.get("aa"));

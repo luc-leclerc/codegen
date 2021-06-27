@@ -7,6 +7,6 @@ import static org.junit.Assert.assertEquals;
 public class PatternUtilTest {
     @Test
     public void toSafeJavaName() {
-        assertEquals("myTestValue", PatternUtil.toSafeJavaName("my-tes{t--value"));
+        assertEquals("myTestValue", PatternUtil.toCamelCaseWithLettersOnly("my-tes{t--value"));
     }
 }

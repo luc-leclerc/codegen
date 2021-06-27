@@ -17,7 +17,7 @@ public class Main extends AbstractMojo {
     @Parameter
     String packageName = "com.lleclerc.codegen.generated";
     @Parameter
-    String folderDestimation = "./main/java/";
+    String folderDestination = "./main/java/";
     @Parameter
     String swaggerFilePath = "C:\\Users\\Luc\\git\\codegen\\src\\test\\resources\\sample.yml";
 
