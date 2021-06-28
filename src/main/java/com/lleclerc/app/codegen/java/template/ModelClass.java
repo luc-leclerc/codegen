@@ -13,5 +13,5 @@ public class ModelClass/*{{{className}}}*/ {
     /*{{#properties}}*/
     @JsonProperty("{{{propertyName}}}")
     LocalDateTime/*{{{type}}}*/ propertySafeJava/*{{{propertyName_safeJava}}}*/;
-    /*{{/properties}}*/ List<LocalDate>/*{{empty}}*/ localDate;/*{{empty}}*/
+    /*{{/properties}}*/ List<LocalDate>/*{{{empty}}}*/ localDate;/*{{{empty}}}*/
 }

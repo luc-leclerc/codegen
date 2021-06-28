@@ -13,9 +13,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class JavaNameMap extends LazyReflectObjectMap {
-    Pattern SAFE_JAVA_SUFFIX = Pattern.compile("^(.*)_(safeJava)$");
-    DateTimeFormatter NOW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
+    static final Pattern SAFE_JAVA_SUFFIX = Pattern.compile("^(.*)_(safeJava)$");
+    static final DateTimeFormatter NOW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
     public JavaNameMap(Object object) {
         super(object);

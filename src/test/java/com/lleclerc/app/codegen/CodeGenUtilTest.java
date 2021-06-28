@@ -13,18 +13,6 @@ import static org.junit.Assert.assertNotNull;
 
 public class CodeGenUtilTest implements ResourceUtil {
     @Test
-    public void cleanUpTemplate_doesNotFail() {
-        // GIVEN
-        String template = readResourceAsString("./template/ModelClass.java");
-
-        // WHEN
-        String cleanedTemplate = JavaCodeGenUtil.cleanUpTemplate(template);
-
-        // THEN
-        assertNotNull(cleanedTemplate);
-    }
-
-    @Test
     @SneakyThrows
     public void compileModelToWriter() {
         // GIVEN
