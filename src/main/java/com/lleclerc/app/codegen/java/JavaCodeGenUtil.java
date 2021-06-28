@@ -25,14 +25,14 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public interface JavaCodeGenUtil {
+public class JavaCodeGenUtil {
     // Prepare mustache template, ex.: `my test/*{{myTag}}*/` -> `my {{myTag}}`
-    Pattern PATTERN_CLEAN_TEMPLATE = Pattern.compile("(.*?)[^ ]*[/][*][{]{2}(.*?)[}]{2}[*][/].*?");
+    static Pattern PATTERN_CLEAN_TEMPLATE = Pattern.compile("(.*?)[^ ]*[/][*][{]{2}(.*?)[}]{2}[*][/].*?");
 
-    String MODEL_CLASS_TEMPLATE = cleanUpTemplate(ResourceUtil.readJavaResourceFromClass(ModelClass.class));
-    String MODEL_ENUM_TEMPLATE = cleanUpTemplate(ResourceUtil.readJavaResourceFromClass(ModelEnum.class));
+    static String MODEL_CLASS_TEMPLATE = cleanUpTemplate(ResourceUtil.readJavaResourceFromClass(ModelClass.class));
+    static String MODEL_ENUM_TEMPLATE = cleanUpTemplate(ResourceUtil.readJavaResourceFromClass(ModelEnum.class));
 
-    static void executeJava(String yamlFilePath, String destinationPath, String basePackage) {
+    public static void executeJava(String yamlFilePath, String destinationPath, String basePackage) {
         InputStream inputStream = IoUtil.toBufferedInputStream(Path.of(yamlFilePath));
         OpenapiV3Model openapiV3Model = JacksonImplYamlUtil.parseInputStream(inputStream, OpenapiV3Model.class);
 
