@@ -2,4 +2,4 @@
 target
 *.iml
 .tmp
-src/main/java/com/lleclerc/app/codegen/model
+src/main/java/com/lleclerc/generated
