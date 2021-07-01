@@ -15,7 +15,7 @@ public class SnakeImplYamlUtilTest implements ResourceUtil {
     @SneakyThrows
     public void loadYaml() {
         // GIVEN
-        InputStream is = readResource("yml-sample.yml");
+        InputStream is = getResourceAsStream("yml-sample.yml");
 
         // WHEN
         Map<String, Object> test = SnakeImplYamlUtil.parseInputStream(is);

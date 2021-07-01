@@ -2,35 +2,41 @@ package com.lleclerc.service.java;
 
 import lombok.SneakyThrows;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.function.Function;
 
-@SuppressWarnings("ConstantConditions") // This fix `.toURI()` warning.
 public interface ResourceUtil<T> {
     @SneakyThrows
-    default InputStream readResource(String fileName) {
-        File file = new File(this.getClass().getResource(fileName).toURI());
-        return new BufferedInputStream(new FileInputStream(file));
+    default InputStream getResourceAsStream(String fileName) {
+        return this.getClass().getResourceAsStream(fileName);
     }
 
     @SneakyThrows
-    default String readResourceAsString(String fileName) {
-        return readResourceAsString(fileName, this.getClass());
+    default String getResourceAsString(String fileName) {
+        return getResourceAsString(fileName, this.getClass());
     }
 
     @SneakyThrows
-    static String readResourceAsString(String fileName, Class<?> rootClass) {
-        Path path = Paths.get(rootClass.getResource(fileName).toURI());
-        return Files.readString(path, StandardCharsets.UTF_8);
+    static String getResourceAsString(String fileName, Class<?> rootClass) {
+        InputStream inputStream = rootClass.getResourceAsStream(fileName);
+        return readAndBufferAndCloseInputStreamAsString(inputStream);
     }
 
-    static String readJavaResourceFromClass(Class<?> classToFindJava) {
-        return readResourceAsString(classToFindJava.getSimpleName() + ".java", classToFindJava);
+    @SneakyThrows
+    private static String readAndBufferAndCloseInputStreamAsString(InputStream inputStream) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (inputStream; InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
+            try (inputStream; reader; bufferedReader) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line).append(System.lineSeparator());
+                }
+            }
+            return stringBuilder.toString();
+        }
     }
 }
